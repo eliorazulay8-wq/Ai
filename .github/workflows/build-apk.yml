@@ -18,7 +18,7 @@ jobs:
           java-version: "17"
       - name: Install Android SDK, NDK and CMake
         run: |
-          export ANDROID_HOME="$RUNNER_TEMP/android-sdk"
+          export ANDROID_HOME="/usr/local/lib/android/sdk"
           mkdir -p "$ANDROID_HOME/cmdline-tools"
           wget -q https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip -O "$RUNNER_TEMP/cmdline-tools.zip"
           unzip -q "$RUNNER_TEMP/cmdline-tools.zip" -d "$ANDROID_HOME/cmdline-tools"
