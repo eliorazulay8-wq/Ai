@@ -1,31 +1,29 @@
-name: Build CodeMaster AI APK
-
+name: Build CodeMaster AI Offline APK
 on:
   push:
     branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out source
-        uses: actions/checkout@v4
-      - name: Set up Java
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - name: Get llama.cpp engine
+        run: git clone --depth 1 https://github.com/ggml-org/llama.cpp.git llama.cpp
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-      - name: Build debug APK
+      - uses: android-actions/setup-android@v3
+      - name: Install Android native build tools
+        run: sdkmanager "cmake;3.22.1" "ndk;27.2.12479018"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build offline APK
         run: gradle --no-daemon assembleDebug
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: CodeMaster-AI-debug-apk
+          name: CodeMaster-AI-Offline-APK
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
