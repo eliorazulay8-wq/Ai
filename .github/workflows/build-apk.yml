@@ -16,9 +16,10 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - uses: android-actions/setup-android@v3
       - name: Install Android native build tools
-        run: sdkmanager "cmake;3.22.1" "ndk;27.2.12479018"
+        run: |
+          yes | sdkmanager --licenses
+          sdkmanager --install "cmake;3.22.1" "ndk;27.2.12479018"
       - uses: gradle/actions/setup-gradle@v4
       - name: Build offline APK
         run: gradle --no-daemon assembleDebug
