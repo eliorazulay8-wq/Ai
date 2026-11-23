@@ -1,25 +1,25 @@
-# CodeMaster AI — Android app
+# CodeMaster AI Offline for Android
 
-A native Android app (Kotlin + WebView) with a phone-friendly coding assistant UI and a GitHub Actions workflow that builds a debug APK in the cloud.
+CodeMaster AI is an Android coding assistant that runs a local GGUF language model through llama.cpp. After the model is downloaded once, inference happens on the phone; chat prompts are not sent to an AI API.
 
-## Build and download the APK (no PC required)
-1. Open this repository on your phone and select **Actions**.
-2. If prompted, enable GitHub Actions.
-3. Select **Build CodeMaster AI APK** and tap **Run workflow** (or push a commit to `main` to trigger it).
-4. Wait for the workflow to finish successfully.
-5. Open the completed run and download the `CodeMaster-AI-debug-apk` artifact.
-6. Extract the downloaded ZIP and install `app-debug.apk`. Android may ask you to allow installs from the app used to download it.
+## Build the APK without a PC
+1. Open the Actions tab in this repository.
+2. Open the latest **Build CodeMaster AI Offline APK** run.
+3. When it finishes successfully, download the **CodeMaster-AI-Offline-APK** artifact.
+4. Extract the ZIP and install app-debug.apk on an Android phone.
 
-## Connect the AI
-On first launch, tap Setup and enter a Gemini API key from https://aistudio.google.com/apikey. The app defaults to Gemini 3.8 Flash. Google offers a free API tier with limited model access and rate limits; stay within the free tier and do not enable paid billing if you want to keep costs at zero. Free-tier content may be used by Google to improve its products. Check current limits and terms at https://ai.google.dev/gemini-api/docs/pricing.
+## First launch
+- Connect to Wi-Fi and tap **Download offline AI model (2.5 GB)**.
+- Keep CodeMaster AI open until the download finishes.
+- The app loads the Qwen3-4B Q4_K_M model. Allow several minutes for first load.
+- Once loaded, the model runs locally and can answer without an internet connection.
 
-**Security:** the key is held only in the page's memory and is cleared when the app restarts. Direct client-side API calls are less secure than a private backend. Do not share your key or a preconfigured APK. This app sends prompts and conversation history to the OpenAI API.
+Model: [Qwen3-4B-GGUF Q4_K_M](https://huggingface.co/Qwen/Qwen3-4B-GGUF), Apache-2.0. Model file is approximately 2.5 GB. It is downloaded separately rather than bundled inside the APK so the APK remains a manageable size.
 
-## Project
-- Android: Kotlin + Android WebView
-- UI: bundled HTML/CSS/JavaScript
-- Package: `com.codemaster.ai`
-- Minimum Android: API 23 (Android 6.0)
-- Build output: debug APK for personal testing, not a Play Store release
+Runtime: [llama.cpp](https://github.com/ggml-org/llama.cpp). The Android build targets arm64-v8a devices.
 
-The app generates code as text; it does not compile or execute arbitrary code on the phone.
+## Important device notes
+- Keep at least 5 GB of free storage before downloading the model.
+- The model uses several GB of RAM while running. Close other apps first. Performance and whether it fits depend on the phone, Android version, available memory, and thermal state.
+- This is a local language model, not a hosted ChatGPT-class service. It can make mistakes; review generated code before running it.
+- Internet is needed for the initial model download only. No API key or paid AI subscription is required.
