@@ -11,7 +11,7 @@ A native Android app (Kotlin + WebView) with a phone-friendly coding assistant U
 6. Extract the downloaded ZIP and install `app-debug.apk`. Android may ask you to allow installs from the app used to download it.
 
 ## Connect the AI
-On first launch, tap Setup and enter your own OpenAI API key. Select a model and connect. API usage is billed separately; a ChatGPT subscription does not include API credits.
+On first launch, tap Setup and enter a Gemini API key from https://aistudio.google.com/apikey. The app defaults to Gemini 3.8 Flash. Google offers a free API tier with limited model access and rate limits; stay within the free tier and do not enable paid billing if you want to keep costs at zero. Free-tier content may be used by Google to improve its products. Check current limits and terms at https://ai.google.dev/gemini-api/docs/pricing.
 
 **Security:** the key is held only in the page's memory and is cleared when the app restarts. Direct client-side API calls are less secure than a private backend. Do not share your key or a preconfigured APK. This app sends prompts and conversation history to the OpenAI API.
 
